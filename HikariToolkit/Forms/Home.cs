@@ -334,7 +334,7 @@ namespace Hikari_Android_Toolkit
                 if (txt_DualAppsPackageInstall.Text != "")
                 {
                     print("Installing...");
-                    cmdProcess.StartProcessing("adb install " + s, formMethods.SelectedDevice());
+                    cmdProcess.StartProcessing("adb install --user " + DualApps + " " + s, formMethods.SelectedDevice());
 
                     RefreshInstalledApps();
                 }
