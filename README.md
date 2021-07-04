@@ -1,5 +1,5 @@
 # Ayra's Dual Apps
-Based on adbGUI as adb backend threading
+Based on adbGUI as adb backend threading, and Hikari Toolkit as GUI
 
 ## Features
 - Install any apk
