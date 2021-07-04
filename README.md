@@ -16,9 +16,9 @@ Based on adbGUI as adb backend threading
 - [latest version](https://github.com/AyraHikari/AyraDualApps/releases/latest)
 
 ## TODO
-[x] Detect dual storage on OneUI
-[x] Detect apps on dual storage on OneUI
-[x] Can install and uninstall cloned apps on OneUI
-[x] Can clone single apk on OneUI
-[ ] Can clone apks and splitted apk on OneUI
-[ ] Support Oxygen OS 11/Hydrogen OS 11
+- [x] Detect dual storage on OneUI
+- [x] Detect apps on dual storage on OneUI
+- [x] Can install and uninstall cloned apps on OneUI
+- [x] Can clone single apk on OneUI
+- [ ] Can clone apks and splitted apk on OneUI
+- [ ] Support Oxygen OS 11/Hydrogen OS 11
