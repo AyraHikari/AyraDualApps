@@ -262,6 +262,7 @@
             // 
             // button3
             // 
+            this.button3.Enabled = false;
             this.button3.Location = new System.Drawing.Point(6, 19);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(183, 35);
@@ -400,6 +401,7 @@
             // 
             // button6
             // 
+            this.button6.Enabled = false;
             this.button6.Location = new System.Drawing.Point(119, 19);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(98, 35);
@@ -416,16 +418,17 @@
             this.button5.TabIndex = 1;
             this.button5.Text = "Source Code";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
-            this.button4.Enabled = false;
             this.button4.Location = new System.Drawing.Point(6, 19);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(107, 35);
             this.button4.TabIndex = 0;
             this.button4.Text = "Update";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // MainForm
             // 

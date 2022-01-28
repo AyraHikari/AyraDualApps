@@ -375,6 +375,11 @@ namespace Hikari_Android_Toolkit
                 string output = cmdProcess.StartProcessingInThread("adb shell pm path " + s, formMethods.SelectedDevice());
                 if (!String.IsNullOrEmpty(output))
                 {
+                    // creating installation session
+                    string installSession = cmdProcess.StartProcessingInThread("adb shell pm install-create --user 95", formMethods.SelectedDevice());
+                    Debug.WriteLine(installSession);
+                    string sesId = installSession.Split('[')[1].Split(']')[0];
+                    Debug.WriteLine(sesId);
 
                     foreach (var item in output.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
                     {
@@ -382,32 +387,22 @@ namespace Hikari_Android_Toolkit
                         var splitter = item.Remove(0, 8);
                         // Copying apks to temp data
                         // If multiple packages detected, pull into PC
-                        if (counts >= 2)
+                        if (counts >= 1)
                         {
-                            print("Failed: Splitted apk is not supported, please install SAI to dual apps\n and install in your device instead");
-                            break;
-                            // print("Pulling " + counts + ".apk");
-                            // string no1 = cmdProcess.StartProcessingInThread("adb pull " + splitter + " " + counts + ".apk", formMethods.SelectedDevice());
-                            // multiPacks += counts + ".apk ";
-                        }
-                        else // Dangerous step was disabled
-                        {
-                            // This may dangerous, perhaps there's better method than this?
-                            // Also above code is disable because install-multiple with --user args does not work
                             string no1 = cmdProcess.StartProcessingInThread("adb shell cp " + splitter + " /data/local/tmp/" + counts + ".apk", formMethods.SelectedDevice());
                             multiPacks += "/data/local/tmp/" + counts + ".apk ";
+                            string no2 = cmdProcess.StartProcessingInThread("adb shell pm install-write " + sesId + " " + counts + ".apk /data/local/tmp/" + counts + ".apk", formMethods.SelectedDevice());
                         }
                     }
-                }
-                if (counts == 1)
-                {
-                    print("Installing packages...");
-                    cmdProcess.StartProcessing("adb install --user " + DualApps + " " + multiPacks, formMethods.SelectedDevice());
+                    print("Installing packages, please wait...");
+                    //cmdProcess.StartProcessing("adb install --user " + DualApps + " " + multiPacks, formMethods.SelectedDevice());
+                    string commit = cmdProcess.StartProcessingInThread("adb shell pm install-commit " + sesId, formMethods.SelectedDevice());
                     RefreshInstalledApps();
                     print("Installed!");
+
+                    //string no3 = cmdProcess.StartProcessingInThread("del " + multiPacks, formMethods.SelectedDevice());
+                    string no3 = cmdProcess.StartProcessingInThread("adb shell rm " + multiPacks, formMethods.SelectedDevice());
                 }
-                //string no3 = cmdProcess.StartProcessingInThread("del " + multiPacks, formMethods.SelectedDevice());
-                string no3 = cmdProcess.StartProcessingInThread("adb shell rm " + multiPacks, formMethods.SelectedDevice());
             }
             else
             {
@@ -468,6 +463,16 @@ namespace Hikari_Android_Toolkit
         public void clear()
         {
             rtb_console.Text = "";
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/AyraHikari/AyraDualApps");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/AyraHikari/AyraDualApps/releases");
         }
     }
 }
